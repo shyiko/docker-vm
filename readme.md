@@ -1,4 +1,4 @@
-# docker-though-vagrant
+# docker-through-vagrant
 
 The easiest way to get started with [Docker](https://www.docker.com/) on Mac OS X (tested on OS X Yosemite 10.10.1) 
 and Windows (tested on Windows 10 Pro Insider Preview. Build 10074).
