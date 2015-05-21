@@ -112,7 +112,7 @@ unison SOURCE_DIR socket://192.168.42.10:5000/TARGET_DIRECTORY \
 
 #### Mounting NFS volumes manually
 
-(it might come in handy if you don't want your whole /Users/USER directory to mounted inside the VM and 
+(it might come in handy if you don't want your whole /Users/USER directory to be mounted inside the VM and 
  narrowing paths with multiple `config.vm.synced_folder` feels too "static") 
  
 ```sh 
