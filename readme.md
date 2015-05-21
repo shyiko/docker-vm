@@ -97,7 +97,7 @@ On Mac OS X - `brew install unison` (2.48.3 at the time of writing).
 On Windows - `choco install unison -version 2.48.3` (provided [chocolatey](https://chocolatey.org/) is installed).
 
 > To install unison inside the VM:   
-`sudo apt-get update && apt-get install -y ocaml build-essential exuberant-ctags &&
+`sudo apt-get update && sudo apt-get install -y ocaml build-essential exuberant-ctags &&
 curl http://www.seas.upenn.edu/~bcpierce/unison/download/releases/unison-2.48.3/unison-2.48.3.tar.gz | tar xz -C /tmp &&
 (cd /tmp/unison-* && make UISTYLE=text && sudo cp unison /usr/local/bin/)`
 
