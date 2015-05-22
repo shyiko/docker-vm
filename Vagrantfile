@@ -1,6 +1,6 @@
 #
 # latest version available at: 
-# https://github.com/shyiko/docker-through-vagrant
+# https://github.com/shyiko/docker-vm
 #
 Vagrant.configure("2") do |config|
 
