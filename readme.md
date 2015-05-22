@@ -1,4 +1,4 @@
-# docker-through-vagrant
+# docker-vm
 
 The easiest way to get started with [Docker](https://www.docker.com/) on Mac OS X (tested on OS X Yosemite 10.10.1) 
 and Windows (tested on Windows 10 Pro Insider Preview. Build 10074).
@@ -36,7 +36,7 @@ You can also get it through [boot2docker](http://boot2docker.io/).
 
 ```sh
 # clone the repo  
-git clone https://github.com/shyiko/docker-vagrant.git && cd docker-vagrant
+git clone https://github.com/shyiko/docker-vm.git && cd docker-vm
 
 # start the vm
 vagrant up
@@ -125,7 +125,7 @@ vagrant ssh -c "mkdir -p SOURCE_DIRECTORY &&
 ## Troubleshooting
 
 * (issue [#12182](https://www.virtualbox.org/ticket/12182))
-  C:\Users\USER\docker-through-vagrant>vagrant up  
+  C:\Users\USER\docker-vm>vagrant up  
   VBoxManage.exe: error: Failed to create the host-only adapter
   ...
   
@@ -133,7 +133,7 @@ vagrant ssh -c "mkdir -p SOURCE_DIRECTORY &&
   Details... -> select "Internet Protocol Version 4 (TCP/IPv4)" -> Properties -> set "IP address" to 192.168.42.1. 
   Try vagrant up again.  
 
-* C:\Users\USER\docker-through-vagrant>vagrant ssh  
+* C:\Users\USER\docker-vm>vagrant ssh  
   `ssh` executable not found in any directories in the %PATH% variable. Is an
   SSH client installed? Try installing Cygwin, MinGW or Git, all of which
   contain an SSH client. Or use your favorite SSH client with the following
