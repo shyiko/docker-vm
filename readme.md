@@ -73,7 +73,7 @@ may be up to the task. Here are some numbers to visually demonstrate the issue (
 | 17.5s             | 18.5s  | 2m10s | 3m25s  |
 
 The good new is - you can continue using NFS/SMB or even vboxsf (as they are not that bad when you have fewer files) and switch to 
-`rsync`/`unison` only when really necessary (more on that in a bit). The secret is to use `mount -o bind`, which
+`rsync`/`unison` only when necessary (more on that in a bit). The secret is to use `mount -o bind`, which
 allows to mount arbitrary directory over the other already mounted one (including subtree), like so:    
 
 ```sh
@@ -132,6 +132,11 @@ vagrant ssh -c "mkdir -p SOURCE_DIRECTORY &&
   WORKAROUND: Settings -> View Network Connections -> Ethernet N ->
   Details... -> select "Internet Protocol Version 4 (TCP/IPv4)" -> Properties -> set "IP address" to 192.168.42.1. 
   Try vagrant up again.  
+
+* C:\Users\USER\docker-vm>vagrant up  
+  The guest machine entered an invalid state while waiting for it to boot. Valid states are 'starting, running'. The machine is in the 'poweroff' state. Please verify everything is configured properly and try again.
+
+  WORKAROUND: Start VirtualBox, select VM named docker-vm... and click 'Start'. If you get an error similar to 'Failed to open a session for the virtual machine docker-vm... . VT-x is not available. (VERR_VMX_NO_VMX).' then [turn Hyper-V off](http://www.hanselman.com/blog/SwitchEasilyBetweenVirtualBoxAndHyperVWithABCDEditBootEntryInWindows81.aspx).
 
 * C:\Users\USER\docker-vm>vagrant ssh  
   `ssh` executable not found in any directories in the %PATH% variable. Is an
