@@ -60,6 +60,8 @@ open http://192.168.42.10:8080/
 > \* on Windows replace `export DOCKER_HOST...` with `set DOCKER_HOST...`   
 \** on Windows `$(pwd)` needs to be replaced with /c/Users/USERNAME/... (unless you are using MSYS/Cygwin)
 
+TIP: On Mac OS X you might want to add `docker-vm() ( cd PATH_TO_DOCKER_VM_CHECKOUT && exec vagrant "$@" )` to the ~/.bash_profile so that you could control `docker-vm` from anywhere inside your shell (e.g. `docker-vm up`, `docker-vm status`, ...).
+
 ## Advanced
  
 ### Performance considerations 
