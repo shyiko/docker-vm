@@ -13,11 +13,11 @@ and Windows (tested on Windows 10 Pro Insider Preview. Build 10074).
 - Performance  
     - NFS/SMB instead of vboxsf (a.k.a. VirtualBox Shared Folders) 
     [by default](http://mitchellh.com/comparing-filesystem-performance-in-virtual-machines). rsync/unison when you need them. 
-- Usability
+- Utility
     - VM is controlled by [Vagrant](https://www.vagrantup.com/), meaning that you get stuff like `vagrant share`, 
     `vagrant package`, etc. out of box.
 
-You are encouraged to fork and repackage to suit **your needs**.
+You are encouraged to fork and change this repo to suit **your needs**.
 
 ## How does it work?
 
@@ -26,41 +26,84 @@ it sends a request (using the value of $DOCKER_HOST environment variable) to the
 /Users/USERNAME` (on Mac OS X) and `C:\Users\USERNAME -> /c/Users/USERNAME & /cygwin/c/Users/USERNAME` mapping it allows
 to use Docker client the way you would on Linux (sort of).
 
-## Usage
+## Installation
 
-> PREREQUISITES: Installed [Docker](https://docs.docker.com/installation/binaries/) client (tested on 1.6.1), [Vagrant](https://www.vagrantup.com/downloads.html) (tested on 1.7.2) & [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (tested on 4.3.26).
- 
-> The easiest way to install Docker client is to `brew install docker` (on Mac OS X) /
-`choco install docker` (on Windows (provided [chocolatey](https://chocolatey.org/) is installed)). 
-You can also get it through [boot2docker](http://boot2docker.io/). 
+> Before you proceed please make sure you have [Docker](https://docs.docker.com/installation/binaries/) client (tested on 1.6.1),
+[Vagrant](https://www.vagrantup.com/downloads.html) (tested on 1.7.2) &
+[VirtualBox](https://www.virtualbox.org/wiki/Downloads) (tested on 4.3.26) installed.
+
+> The easiest way to get Docker client is to `brew install docker` (on Mac OS X) /
+`choco install docker` (on Windows (provided [chocolatey](https://chocolatey.org/) is installed)).
+You can also get it through [boot2docker](http://boot2docker.io/).
+
+### Automated (Mac OS X only)
+
+> PREREQUISITES: Installed [Git](https://git-scm.com/downloads).
 
 ```sh
-# clone the repo  
-git clone https://github.com/shyiko/docker-vm.git && cd docker-vm
+curl -o- https://raw.githubusercontent.com/shyiko/docker-vm/master/install.sh | bash
+```
+> (reopen terminal/tab on completion)
 
-# start the vm
-vagrant up
+The script clones the docker-vm repository to ~/.docker-vm and adds initialization
+code to ~/.bashrc (or ~/.bash_profile, ~/.zshrc, ~/.profile, whichever it finds first).
 
-# configure docker client *
-# NOTE: unless you want to do this every time you open up a new terminal/tab -
-#       consider appending lines below to the ~/.bash_profile
+You can customize repository url, checkout directory and profile using the
+DOCKER_VM_SOURCE, DOCKER_VM_DIR, and PROFILE variables (e.g.
+`curl ... | DOCKER_VM_SOURCE=http://github.com/YOUR_NAME/docker-vm.git bash` to
+use your fork instead of this repo).
+
+### Manual
+
+* Mac OS X
+
+```sh
+git clone https://github.com/shyiko/docker-vm.git ~/.docker-vm
+
+# NOTE: unless you want to execute lines below every time you open up a new terminal/tab -
+#       consider adding them to the ~/.bash_profile (or whichever profile you use)
 #       (more on that here - http://ss64.com/osx/syntax-bashrc.html)
+docker-vm() ( cd ~/.docker-vm && exec vagrant "$@" )
+
 export DOCKER_HOST=tcp://192.168.42.10:2376
-unset DOCKER_TLS_VERIFY # if boot2docker is installed 
+unset DOCKER_TLS_VERIFY # if boot2docker is installed
+```
+
+* Windows
+
+```sh
+git clone https://github.com/shyiko/docker-vm.git "%USERPROFILE%/.docker-vm"
+
+(
+echo @ECHO OFF
+echo SETLOCAL
+echo cd ^%USERPROFILE^%\.docker-vm
+echo vagrant %*
+echo ENDLOCAL
+) > %SystemRoot%\system32\docker-vm.bat
+
+set DOCKER_HOST=tcp://192.168.42.10:2376
+unset DOCKER_TLS_VERIFY
+```
+
+## Usage
+
+```sh
+docker-vm up
 
 # verify that docker client is able to connect to the daemon running inside the vm
 docker version
 
-# start using docker **
+# start using docker *
 docker run -v $(pwd):/usr/share/nginx/html -d -p 8080:80 nginx
 echo "hello world" > index.html
 open http://192.168.42.10:8080/
 ```
 
-> \* on Windows replace `export DOCKER_HOST...` with `set DOCKER_HOST...`   
-\** on Windows `$(pwd)` needs to be replaced with /c/Users/USERNAME/... (unless you are using MSYS/Cygwin)
+\* on Windows `$(pwd)` needs to be replaced with /c/Users/USERNAME/... (unless you are using MSYS/Cygwin)
 
-TIP: On Mac OS X you might want to add `docker-vm() ( cd PATH_TO_DOCKER_VM_CHECKOUT && exec vagrant "$@" )` to the ~/.bash_profile so that you could control `docker-vm` from anywhere inside your shell (e.g. `docker-vm up`, `docker-vm status`, ...).
+> Note that `docker-vm` is basically just an alias for `vagrant` which means that
+you can use all the [commands](https://docs.vagrantup.com/v2/cli/index.html) supported by the latter (e.g. `docker-vm suspend`, `docker-vm status`, ...).
 
 ## Advanced
  
@@ -70,7 +113,7 @@ Sooner or later, chances are that you'll have to deal with a lot of small files.
 may be up to the task. Here are some numbers to visually demonstrate the issue (time taken to make a copy of 
 `node_modules` containing 32k of files / 290mb in size on MacBook Pro (Retina, Mid 2012), obviously YMMV):
 
-| VirtualBox native | native | NFS   | VirtualBox Shared Folders (vboxsf) |
+| VirtualBox native | native | Network File System (NFS) | VirtualBox Shared Folders (vboxsf) |
 | ----------------- | ------ | ----- | ------ |
 | 17.5s             | 18.5s  | 2m10s | 3m25s  |
 
