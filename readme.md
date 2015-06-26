@@ -47,6 +47,8 @@ curl -o- https://raw.githubusercontent.com/shyiko/docker-vm/master/install.sh | 
 
 The script clones the docker-vm repository to ~/.docker-vm and adds initialization
 code to ~/.bashrc (or ~/.bash_profile, ~/.zshrc, ~/.profile, whichever it finds first).
+It also appends `192.168.42.10 docker-vm` to the /etc/hosts so that you would be able to reference
+VM by name and not just ip address (e.g. `http://docker-vm:8000/`).
 
 You can customize repository url, checkout directory and profile using the
 DOCKER_VM_SOURCE, DOCKER_VM_DIR, and PROFILE variables (e.g.
@@ -97,10 +99,14 @@ docker version
 # start using docker *
 docker run -v $(pwd):/usr/share/nginx/html -d -p 8080:80 nginx
 echo "hello world" > index.html
-open http://192.168.42.10:8080/
+open http://docker-vm:8080/ # **
 ```
 
 \* on Windows `$(pwd)` needs to be replaced with /c/Users/USERNAME/... (unless you are using MSYS/Cygwin)
+
+\** if you don't have `192.168.42.10 docker-vm` in `/etc/hosts`
+(or [equivalent](http://superuser.com/questions/525688/whats-the-windows-equivalent-of-etc-hosts) on Windows) -
+replace `http://docker-vm:8080/` with `http://192.168.42.10:8080/`.
 
 > Note that `docker-vm` is basically just an alias for `vagrant` which means that
 you can use all the [commands](https://docs.vagrantup.com/v2/cli/index.html) supported by the latter (e.g. `docker-vm suspend`, `docker-vm status`, ...).
