@@ -57,6 +57,11 @@ else
   fi
 fi
 
+if ! grep -qc 'docker-vm' /etc/hosts; then
+  echo 'Adding "192.168.42.10 docker-vm" to /etc/hosts'
+  sudo sh -c "echo '192.168.42.10 docker-vm' >> /etc/hosts" || true
+else
+  echo "docker-vm alias is already in /etc/hosts"
+fi
+
 } # this ensures the entire script is downloaded
-
-
