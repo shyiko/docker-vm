@@ -28,7 +28,8 @@ to use Docker client the way you would on Linux (sort of).
 
 ## Installation
 
-> Before you proceed please make sure you have [Docker](https://docs.docker.com/installation/binaries/) client (tested on 1.6.1),
+Irrespective of whether you're going to go with "Automated" or "Manual" setup, please make sure you have
+[Git](https://git-scm.com/downloads), [Docker](https://docs.docker.com/installation/binaries/) client (see below) (tested on 1.6.1),
 [Vagrant](https://www.vagrantup.com/downloads.html) (tested on 1.7.2) &
 [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (tested on 4.3.26) installed.
 
@@ -38,12 +39,13 @@ You can also get it through [boot2docker](http://boot2docker.io/).
 
 ### Automated (Mac OS X only)
 
-> PREREQUISITES: Installed [Git](https://git-scm.com/downloads).
-
 ```sh
 curl -o- https://raw.githubusercontent.com/shyiko/docker-vm/master/install.sh | bash
 ```
 > (reopen terminal/tab on completion)
+
+NOTE that if you get something like "-bash: docker-vm: command not found" then it's probably because ~/.bashrc is not 
+sourced from ~/.bash_profile. In that case run `echo 'if [ -f ~/.bashrc ]; then source ~/.bashrc; fi' >> ~/.bash_profile` and restart ternail/tab.
 
 The script clones the docker-vm repository to ~/.docker-vm and adds initialization
 code to ~/.bashrc (or ~/.bash_profile, ~/.zshrc, ~/.profile, whichever it finds first).
@@ -91,7 +93,7 @@ unset DOCKER_TLS_VERIFY
 ## Usage
 
 ```sh
-docker-vm up
+docker-vm up # boot up the vm (check "docker-vm --help" for the list of available commands)
 
 # verify that docker client is able to connect to the daemon running inside the vm
 docker version
