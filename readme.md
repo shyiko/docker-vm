@@ -45,7 +45,7 @@ curl -o- https://raw.githubusercontent.com/shyiko/docker-vm/master/install.sh | 
 > (reopen terminal/tab on completion)
 
 NOTE that if you get something like "-bash: docker-vm: command not found" then it's probably because ~/.bashrc is not 
-sourced from ~/.bash_profile. In that case run `echo 'if [ -f ~/.bashrc ]; then source ~/.bashrc; fi' >> ~/.bash_profile` and restart ternail/tab.
+sourced from ~/.bash_profile. In that case run `echo 'if [ -f ~/.bashrc ]; then source ~/.bashrc; fi' >> ~/.bash_profile` and restart your terminal/tab.
 
 The script clones the docker-vm repository to ~/.docker-vm and adds initialization
 code to ~/.bashrc (or ~/.bash_profile, ~/.zshrc, ~/.profile, whichever it finds first).
