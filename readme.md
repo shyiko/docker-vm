@@ -190,6 +190,13 @@ vagrant ssh -c "mkdir -p SOURCE_DIRECTORY &&
 
   WORKAROUND: Start VirtualBox, select VM named docker-vm... and click 'Start'. If you get an error similar to 'Failed to open a session for the virtual machine docker-vm... . VT-x is not available. (VERR_VMX_NO_VMX).' then [turn Hyper-V off](http://www.hanselman.com/blog/SwitchEasilyBetweenVirtualBoxAndHyperVWithABCDEditBootEntryInWindows81.aspx).
 
+* (issue [#3139](https://github.com/mitchellh/vagrant/issues/3139))
+  C:\Users\USER\docker-vm>vagrant up  
+  Clearing any previously set forwarded ports  
+  ... or similar and then it just hangs.  
+
+  SOLUTION: Either install [PowerShell 3](http://www.microsoft.com/en-us/download/details.aspx?id=34595) or remove/comment out ", type: smb" in [Vagrantfile](https://github.com/shyiko/docker-vm/blob/master/Vagrantfile#L25). See related issue for more information. 
+
 * C:\Users\USER\docker-vm>vagrant ssh  
   `ssh` executable not found in any directories in the %PATH% variable. Is an
   SSH client installed? Try installing Cygwin, MinGW or Git, all of which
