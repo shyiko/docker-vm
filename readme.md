@@ -80,7 +80,7 @@ git clone https://github.com/shyiko/docker-vm.git "%USERPROFILE%/.docker-vm"
 (
 echo @ECHO OFF
 echo SETLOCAL
-echo cd ^%USERPROFILE^%\.docker-vm
+echo cd /D ^%USERPROFILE^%\.docker-vm
 echo vagrant %*
 echo ENDLOCAL
 ) > %SystemRoot%\system32\docker-vm.bat
