@@ -114,6 +114,8 @@ replace `http://docker-vm:8080/` with `http://192.168.42.10:8080/`.
 > Note that `docker-vm` is basically just an alias for `vagrant` which means that
 you can use all the [commands](https://docs.vagrantup.com/v2/cli/index.html) supported by the latter (e.g. `docker-vm suspend`, `docker-vm status`, ...).
 
+Getting things to work on Windows can be a little bit tricky (what a suprise, right). Check out the "Troubleshooting" section (further in the document) if you experience any problems with `docker-vm up`.
+
 ## Advanced
  
 ### Performance considerations 
@@ -179,7 +181,7 @@ vagrant ssh -c "mkdir -p SOURCE_DIRECTORY &&
 ## Troubleshooting
 
 * (issue [#12182](https://www.virtualbox.org/ticket/12182))
-  C:\Users\USER\docker-vm>vagrant up  
+  C:\>docker-vm up  
   VBoxManage.exe: error: Failed to create the host-only adapter
   ...
   
@@ -187,19 +189,19 @@ vagrant ssh -c "mkdir -p SOURCE_DIRECTORY &&
   Details... -> select "Internet Protocol Version 4 (TCP/IPv4)" -> Properties -> set "IP address" to 192.168.42.1. 
   Try vagrant up again.  
 
-* C:\Users\USER\docker-vm>vagrant up  
+* C:\>docker-vm up  
   The guest machine entered an invalid state while waiting for it to boot. Valid states are 'starting, running'. The machine is in the 'poweroff' state. Please verify everything is configured properly and try again.
 
   WORKAROUND: Start VirtualBox, select VM named docker-vm... and click 'Start'. If you get an error similar to 'Failed to open a session for the virtual machine docker-vm... . VT-x is not available. (VERR_VMX_NO_VMX).' then [turn Hyper-V off](http://www.hanselman.com/blog/SwitchEasilyBetweenVirtualBoxAndHyperVWithABCDEditBootEntryInWindows81.aspx).
 
 * (issue [#3139](https://github.com/mitchellh/vagrant/issues/3139))
-  C:\Users\USER\docker-vm>vagrant up  
+  C:\>docker-vm up  
   Clearing any previously set forwarded ports  
   ... or similar and then it just hangs.  
 
   SOLUTION: Either install [PowerShell 3](http://www.microsoft.com/en-us/download/details.aspx?id=34595) or remove/comment out ", type: smb" in [Vagrantfile](https://github.com/shyiko/docker-vm/blob/master/Vagrantfile#L25). See related issue for more information. 
 
-* C:\Users\USER\docker-vm>vagrant ssh  
+* C:\>docker-vm ssh  
   `ssh` executable not found in any directories in the %PATH% variable. Is an
   SSH client installed? Try installing Cygwin, MinGW or Git, all of which
   contain an SSH client. Or use your favorite SSH client with the following
