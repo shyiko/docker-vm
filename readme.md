@@ -34,8 +34,7 @@ Irrespective of whether you're going to go with "Automated" or "Manual" setup, p
 [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (tested on 4.3.26) installed.
 
 > The easiest way to get Docker client is to `brew install docker` (on Mac OS X) /
-`choco install docker` (on Windows (provided [chocolatey](https://chocolatey.org/) is installed)).
-You can also get it through [boot2docker](http://boot2docker.io/).
+`choco install docker` (on Windows (provided [chocolatey](https://chocolatey.org/) is installed)). Another option is to get binaries as described [here](https://docs.docker.com/installation/binaries/).
 
 ### Automated (Mac OS X only)
 
