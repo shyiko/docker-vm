@@ -74,6 +74,8 @@ unset DOCKER_TLS_VERIFY # if boot2docker is installed
 
 * Windows
 
+(execute in `cmd`)
+
 ```sh
 git clone https://github.com/shyiko/docker-vm.git "%USERPROFILE%/.docker-vm"
 
