@@ -118,6 +118,23 @@ you can use all the [commands](https://docs.vagrantup.com/v2/cli/index.html) sup
 
 Getting things to work on Windows can be a little bit tricky (what a suprise, right). Check out the "Troubleshooting" section (further in the document) if you experience any problems with `docker-vm up`.
 
+## A note on docker-compose
+
+Right now [docker-compose](https://github.com/docker/compose) is available for Linux / Mac OS X only. Windows support is coming in [docker/compose#1085](https://github.com/docker/compose/issues/1085). Until then, one way to get docker-compose on Windows is to:
+
+1. Run ```docker-vm ssh -c 'sudo sh -c "curl -L https://github.com/docker/compose/releases/download/1.3.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose"'``` (which installs docker-compose inside the VM).
+
+2. Create docker-compose alias. If you are using MSYS/Cygwin then it's a matter of adding `docker-compose() ( docker-vm ssh -c "cd $(pwd) && exec docker-compose $*" )` to ~/.bashrc, otherwise - execute (in `cmd`): 
+    ```sh
+    (
+    echo @ECHO OFF
+    echo SETLOCAL
+    echo SET pwd=%cd:\=/%
+    echo docker-vm ssh -c "cd %pwd:C:/=/c/% && exec docker-compose %*"
+    echo ENDLOCAL
+    ) > %SystemRoot%\system32\docker-compose.bat
+    ```
+
 ## Advanced
  
 ### Performance considerations 
