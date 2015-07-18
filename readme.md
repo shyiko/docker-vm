@@ -74,6 +74,8 @@ unset DOCKER_TLS_VERIFY # if boot2docker is installed
 
 * Windows
 
+> MSYS/Cygwin users only: see installation instructions for Mac OS X.
+
 (execute in `cmd`)
 
 ```sh
