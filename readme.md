@@ -152,7 +152,7 @@ The good new is - you can continue using NFS/SMB or even vboxsf (as they are not
 allows to mount arbitrary directory over the other already mounted one (including subtree), like so:    
 
 ```sh
-vagrant ssh -c "
+docker-vm ssh -c "
     SOURCE_DIR=/Users/USERNAME/Projects &&
     MOUNT_ROOT=/home/vagrant/.mnt &&
     mkdir -p $MOUNT_ROOT/$SOURCE_DIR && sudo mount -o bind $MOUNT_ROOT/$SOURCE_DIR $SOURCE_DIR"        
@@ -178,7 +178,7 @@ curl http://www.seas.upenn.edu/~bcpierce/unison/download/releases/unison-2.48.3/
 
 ```sh
 # start unison daemon
-vagrant ssh -c "unison -socket 5000"
+docker-vm ssh -c "unison -socket 5000"
  
 # start syncing (see `unison -help` for more information)  
 unison SOURCE_DIR socket://192.168.42.10:5000/TARGET_DIRECTORY \
@@ -191,7 +191,7 @@ unison SOURCE_DIR socket://192.168.42.10:5000/TARGET_DIRECTORY \
  narrowing paths with multiple `config.vm.synced_folder` feels too "static") 
  
 ```sh 
-vagrant ssh -c "mkdir -p SOURCE_DIRECTORY && 
+docker-vm ssh -c "mkdir -p SOURCE_DIRECTORY && 
     mount -o 'vers=3,udp' 192.168.42.1:SOURCE_DIRECTORY SOURCE_DIRECTORY"
 ``` 
 
