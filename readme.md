@@ -129,8 +129,8 @@ Right now [docker-compose](https://github.com/docker/compose) is available for L
     (
     echo @ECHO OFF
     echo SETLOCAL
-    echo SET pwd=%cd:\=/%
-    echo docker-vm ssh -c "cd %pwd:C:/=/c/% && exec docker-compose %*"
+    echo SET pwd=^%cd^:\=/%
+    echo docker-vm ssh -c ^"cd ^%pwd^:C:/=/c/% ^&^& exec docker-compose %*^"
     echo ENDLOCAL
     ) > %SystemRoot%\system32\docker-compose.bat
     ```
