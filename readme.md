@@ -34,7 +34,7 @@ Irrespective of whether you're going to go with "Automated" or "Manual" setup, p
 [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (tested on 4.3.26) installed.
 
 > The easiest way to get Docker client is to `brew install docker` (on Mac OS X) /
-`choco install docker` (on Windows (provided [chocolatey](https://chocolatey.org/) is installed)). Another option is to get binaries as described [here](https://docs.docker.com/installation/binaries/).
+`choco install docker` (on Windows (provided [chocolatey](https://chocolatey.org/) is installed)). Another option is to get binaries from [here](https://docs.docker.com/installation/binaries/) (latest - Mac OS X: [i386](https://get.docker.com/builds/Darwin/i386/docker-latest)/[x86_64](https://get.docker.com/builds/Darwin/x86_64/docker-latest) / Windows: [i386](https://get.docker.com/builds/Windows/i386/docker-latest.exe)/[x86_64](https://get.docker.com/builds/Windows/x86_64/docker-latest.exe)).
 
 ### Automated (Mac OS X only)
 
@@ -122,7 +122,7 @@ Getting things to work on Windows can be a little bit tricky (what a suprise, ri
 
 Right now [docker-compose](https://github.com/docker/compose) is available for Linux / Mac OS X only. Windows support is coming in [docker/compose#1085](https://github.com/docker/compose/issues/1085). Until then, one way to get docker-compose on Windows is to:
 
-1. Run ```docker-vm ssh -c 'sudo sh -c "curl -L https://github.com/docker/compose/releases/download/1.3.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose"'``` (which installs docker-compose inside the VM).
+1. Enter the VM with `docker-vm ssh` and install docker-compose by executing `sudo sh -c "curl -L https://github.com/docker/compose/releases/download/1.3.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose"`.
 
 2. Create docker-compose alias. If you are using MSYS/Cygwin then it's a matter of adding `docker-compose() ( docker-vm ssh -c "cd $(pwd) && exec docker-compose $*" )` to ~/.bashrc, otherwise - execute (in `cmd`): 
     ```sh
@@ -148,14 +148,15 @@ may be up to the task. Here are some numbers to visually demonstrate the issue (
 | 17.5s             | 18.5s  | 2m10s | 3m25s  |
 
 The good new is - you can continue using NFS/SMB or even vboxsf (as they are not that bad when you have fewer files) and switch to 
-`rsync`/`unison` only when necessary (more on that in a bit). The secret is to use `mount -o bind`, which
+`rsync`/`unison` only when necessary (more on that in a bit). The solution is to use `mount -o bind`, which
 allows to mount arbitrary directory over the other already mounted one (including subtree), like so:    
 
 ```sh
 docker-vm ssh -c "
     SOURCE_DIR=/Users/USERNAME/Projects &&
     MOUNT_ROOT=/home/vagrant/.mnt &&
-    mkdir -p $MOUNT_ROOT/$SOURCE_DIR && sudo mount -o bind $MOUNT_ROOT/$SOURCE_DIR $SOURCE_DIR"        
+    mkdir -p $MOUNT_ROOT/$SOURCE_DIR && 
+    sudo mount -o bind $MOUNT_ROOT/$SOURCE_DIR $SOURCE_DIR"        
 ``` 
 
 After that just `rsync`/`unison` files to `$MOUNT_ROOT/$SOURCE_DIR`.
