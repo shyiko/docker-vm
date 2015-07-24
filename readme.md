@@ -122,7 +122,7 @@ Getting things to work on Windows can be a little bit tricky (what a suprise, ri
 
 Right now [docker-compose](https://github.com/docker/compose) is available for Linux / Mac OS X only. Windows support is coming in [docker/compose#1085](https://github.com/docker/compose/issues/1085). Until then, one way to get docker-compose on Windows is to:
 
-1. Enter the VM with `docker-vm ssh` and install docker-compose by executing `sudo sh -c "curl -L https://github.com/docker/compose/releases/download/1.3.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose"`.
+1. Enter the VM with `docker-vm ssh` and install docker-compose by executing ```sudo sh -c "curl -L https://github.com/docker/compose/releases/download/1.3.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose"```.
 
 2. Create docker-compose alias. If you are using MSYS/Cygwin then it's a matter of adding `docker-compose() ( docker-vm ssh -c "cd $(pwd) && exec docker-compose $*" )` to ~/.bashrc, otherwise - execute (in `cmd`): 
     ```sh
