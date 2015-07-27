@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: "192.168.42.10"
 
   # install & start docker daemon
-  config.vm.provision "docker", version: "1.6.1"
+  config.vm.provision "docker", version: "latest"
 
   # make docker daemon accessible from the host OS (port 2376)   
   config.vm.provision :shell, inline: <<-EOT
