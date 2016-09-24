@@ -29,12 +29,9 @@ to use Docker client the way you would on Linux (sort of).
 ## Installation
 
 Irrespective of whether you're going to go with "Automated" or "Manual" setup, please make sure you have
-[Git](https://git-scm.com/downloads), [Docker](https://docs.docker.com/installation/binaries/) client (see below) (tested on 1.6.1),
+[Git](https://git-scm.com/downloads), [Docker](https://docs.docker.com/installation/binaries/) client (grab it from [here](https://docs.docker.com/installation/binaries/) (latest - Mac OS X: [x86_64](https://get.docker.com/builds/Darwin/x86_64/docker-latest.tgz) / Windows: [i386](https://get.docker.com/builds/Windows/i386/docker-latest.zip)/[x86_64](https://get.docker.com/builds/Windows/x86_64/docker-latest.zip))) (tested on 1.6.1),
 [Vagrant](https://www.vagrantup.com/downloads.html) (tested on 1.7.2) &
 [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (tested on 4.3.26) installed.
-
-> The easiest way to get Docker client is to `brew install docker` (on Mac OS X) /
-`choco install docker` (on Windows (provided [chocolatey](https://chocolatey.org/) is installed)). Another option is to get binaries from [here](https://docs.docker.com/installation/binaries/) (latest - Mac OS X: [i386](https://get.docker.com/builds/Darwin/i386/docker-latest)/[x86_64](https://get.docker.com/builds/Darwin/x86_64/docker-latest) / Windows: [i386](https://get.docker.com/builds/Windows/i386/docker-latest.exe)/[x86_64](https://get.docker.com/builds/Windows/x86_64/docker-latest.exe)).
 
 ### Automated (Mac OS X only)
 
